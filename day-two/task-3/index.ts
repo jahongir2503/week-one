@@ -16,10 +16,11 @@ function createBook(book: Book): TargetData {
     const url = `www.someurl.com/preview?title=${book.title}&year=${book.year}&author=${book.author}`;
 
     return {
-        book: book,
-        preview: preview,
-        url: url
+        book,
+        preview,
+        url
     };
+    //исправил
 }
 
 let addBook: TargetData = createBook({
@@ -29,3 +30,4 @@ let addBook: TargetData = createBook({
 });
 
 console.log(addBook);
+
