@@ -1,33 +1,30 @@
 interface Book {
     title: string;
-    author: string;
     year: number;
+    author: string;
 }
 
-interface TargetData {
-    book: Book;
+interface TargetData extends Book {
     preview: string;
     url: string;
 }
 
+function createBook(title: string, year: number, author: string): TargetData {
 
-function createBook(book: Book): TargetData {
-    const preview = `Название: ${book.title}, Автор: ${book.author}, Год: ${book.year}г.`;
-    const url = `www.someurl.com/preview?title=${book.title}&year=${book.year}&author=${book.author}`;
+    const preview = `Название: ${title}, Автор: ${author}, Год: ${year}г.`;
+
+    const url = `www.someurl.com/preview?title=${title}&year=${year}&author=${author}`;
 
     return {
-        book,
+        title,
+        year,
+        author,
         preview,
-        url
+        url,
     };
-    //исправил
 }
 
-let addBook: TargetData = createBook({
-    title: "Come as u",
-    author: "Robert D. jr.",
-    year: 1998
-});
+let addBook = createBook("Come as u", 1992, "Robert D. jr.");
+
 
 console.log(addBook);
-
