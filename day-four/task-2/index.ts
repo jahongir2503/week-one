@@ -54,18 +54,26 @@ const input: UserWithGadget[] = [
 
 
 function aggregateUsers(input: UserWithGadget[]): UserWithGadgets[] {
-    const userMap: Map<string, UserWithGadgets> = new Map();
+    const userArray: UserWithGadgets[] = [];
 
     for (const { id, name, gadget } of input) {
-        if (!userMap.has(id)) {
-            userMap.set(id, { id, name, gadgets: [] });
+        let userFound = false;
+
+        for (const user of userArray) {
+            if (user.id === id) {
+                user.gadgets.push(gadget);
+                userFound = true;
+                break;
+            }
         }
-        userMap.get(id)!.gadgets.push(gadget);
+
+        if (!userFound) {
+            userArray.push({ id, name, gadgets: [gadget] });
+        }
     }
 
-    return Array.from(userMap.values());
+    return userArray;
 }
-
 
 const output: UserWithGadgets[] = aggregateUsers(input);
 console.log(output);
